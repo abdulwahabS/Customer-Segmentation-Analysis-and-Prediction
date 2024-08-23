@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Cluster {{ cluster }}{% endblock %}
+{% block content %}
+<div class="card border-success mb-3">
+  <div class="card-header bg-success text-white">Prediction</div>
+  <div class="card-body">
+    <h4 class="card-title">Assigned to cluster #{{ cluster }}</h4>
+    <p class="card-text">Use this segment ID for personalised marketing.</p>
+  </div>
+</div>
+<a href="/" class="btn btn-link">⟵ Try another</a>
+{% endblock %}

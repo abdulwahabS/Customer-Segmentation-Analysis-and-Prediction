@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+{% block title %}Predict Cluster{% endblock %}
+{% block content %}
+<h2>Enter customer snapshot</h2>
+<div class="mb-3">
+  <button type="button" id="autoFillBtn" class="btn btn-secondary">Auto-fill with Sample Data</button>
+  <button type="button" id="randomFillBtn" class="btn btn-info ms-2">Generate Random Data</button>
+</div>
+<form method="post" class="row g-3" id="customerForm">
+
+  <!-- Demographics -->
+  <div class="col-md-4">
+    <label class="form-label">Age</label>
+    <input name="Age" type="number" min="18" max="90" class="form-control" value="45" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Income</label>
+    <input name="Income" type="number" step="100" class="form-control" value="50000" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Education</label>
+    <select name="Education" class="form-select" required>
+      <option value="Basic">Basic</option>
+      <option value="2n Cycle">2n Cycle</option>
+      <option value="Graduation" selected>Graduation</option>
+      <option value="Master">Master</option>
+      <option value="PhD">PhD</option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label">Marital Status</label>
+    <select name="Marital_Status" class="form-select" required>
+      <option value="Married">Married</option>
+      <option value="Together" selected>Together</option>
+      <option value="Single">Single</option>
+      <option value="Divorced">Divorced</option>
+      <option value="Widow">Widow</option>
+    </select>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Kidhome</label>
+    <input name="Kidhome" type="number" min="0" max="5" class="form-control" value="0" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Teenhome</label>
+    <input name="Teenhome" type="number" min="0" max="5" class="form-control" value="0" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Recency (days)</label>
+    <input name="Recency" type="number" min="0" class="form-control" value="30" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Tenure (days)</label>
+    <input name="TenureDays" type="number" min="0" class="form-control" value="365" required>
+  </div>
+  
+  <!-- Product Spending -->
+  <div class="col-12 mt-4 mb-2">
+    <h4>Spending by Product Category</h4>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Wine Spending</label>
+    <input name="MntWines" type="number" min="0" class="form-control" value="200" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Fruits Spending</label>
+    <input name="MntFruits" type="number" min="0" class="form-control" value="20" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Meat Products Spending</label>
+    <input name="MntMeatProducts" type="number" min="0" class="form-control" value="150" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Fish Products Spending</label>
+    <input name="MntFishProducts" type="number" min="0" class="form-control" value="30" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Sweet Products Spending</label>
+    <input name="MntSweetProducts" type="number" min="0" class="form-control" value="25" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Gold Products Spending</label>
+    <input name="MntGoldProds" type="number" min="0" class="form-control" value="15" required>
+  </div>
+  
+  <!-- Purchase Channels -->
+  <div class="col-12 mt-4 mb-2">
+    <h4>Purchase Frequency by Channel</h4>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Deals Purchases</label>
+    <input name="NumDealsPurchases" type="number" min="0" class="form-control" value="2" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Web Purchases</label>
+    <input name="NumWebPurchases" type="number" min="0" class="form-control" value="4" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Catalog Purchases</label>
+    <input name="NumCatalogPurchases" type="number" min="0" class="form-control" value="2" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Store Purchases</label>
+    <input name="NumStorePurchases" type="number" min="0" class="form-control" value="6" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Web Visits per Month</label>
+    <input name="NumWebVisitsMonth" type="number" min="0" class="form-control" value="5" required>
+  </div>
+  
+  <!-- Campaign Responses -->
+  <div class="col-12 mt-4 mb-2">
+    <h4>Campaign Responses</h4>
+  </div>
+  
+  <div class="col-md-2">
+    <label class="form-label">Campaign 1</label>
+    <select name="AcceptedCmp1" class="form-select" required>
+      <option value="0" selected>No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  
+  <div class="col-md-2">
+    <label class="form-label">Campaign 2</label>
+    <select name="AcceptedCmp2" class="form-select" required>
+      <option value="0" selected>No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  
+  <div class="col-md-2">
+    <label class="form-label">Campaign 3</label>
+    <select name="AcceptedCmp3" class="form-select" required>
+      <option value="0" selected>No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  
+  <div class="col-md-2">
+    <label class="form-label">Campaign 4</label>
+    <select name="AcceptedCmp4" class="form-select" required>
+      <option value="0" selected>No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  
+  <div class="col-md-2">
+    <label class="form-label">Campaign 5</label>
+    <select name="AcceptedCmp5" class="form-select" required>
+      <option value="0" selected>No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  
+  <div class="col-md-2">
+    <label class="form-label">Response</label>
+    <select name="Response" class="form-select" required>
+      <option value="0" selected>No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  
+  <!-- Other Features -->
+  <div class="col-md-4">
+    <label class="form-label">Complaint</label>
+    <select name="Complain" class="form-select" required>
+      <option value="0" selected>No</option>
+      <option value="1">Yes</option>
+    </select>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Cost Contact</label>
+    <input name="Z_CostContact" type="number" class="form-control" value="3" required>
+  </div>
+  
+  <div class="col-md-4">
+    <label class="form-label">Revenue</label>
+    <input name="Z_Revenue" type="number" class="form-control" value="11" required>
+  </div>
+  
+  <div class="col-12 mt-3">
+    <button type="submit" class="btn btn-primary">Predict customer cluster</button>
+  </div>
+</form>
+
+<p class="text-muted mt-3">Model K = {{ meta.k }} | silhouette = {{ meta.silhouette | round(3) }}</p>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+  // Sample customer data for quick form filling
+  const sampleData = {
+    'Age': 45,
+    'Income': 58000,
+    'Education': 'Graduation',
+    'Marital_Status': 'Together',
+    'Kidhome': 1,
+    'Teenhome': 1, 
+    'Recency': 30,
+    'TenureDays': 365,
+    'MntWines': 350,
+    'MntFruits': 25,
+    'MntMeatProducts': 165,
+    'MntFishProducts': 50,
+    'MntSweetProducts': 35,
+    'MntGoldProds': 20,
+    'NumDealsPurchases': 2,
+    'NumWebPurchases': 6,
+    'NumCatalogPurchases': 3,
+    'NumStorePurchases': 8,
+    'NumWebVisitsMonth': 5,
+    'AcceptedCmp1': '0',
+    'AcceptedCmp2': '0',
+    'AcceptedCmp3': '1',
+    'AcceptedCmp4': '0',
+    'AcceptedCmp5': '0',
+    'Response': '0',
+    'Complain': '0',
+    'Z_CostContact': 3,
+    'Z_Revenue': 11
+  };
+
+  // Auto-fill with sample data
+  $('#autoFillBtn').click(function(e) {
+    // Prevent default behavior
+    e.preventDefault();
+    
+    // Loop through the sample data and fill the form fields
+    for (const [name, value] of Object.entries(sampleData)) {
+      const field = $(`[name="${name}"]`);
+      if (field.length) {
+        if (field.is('select')) {
+          field.val(value);
+        } else {
+          field.val(value);
+        }
+      }
+    }
+    
+    // Return focus to the button
+    $(this).blur();
+    return false;
+  });
+  
+  // Generate random customer data
+  $('#randomFillBtn').click(function(e) {
+    // Prevent default behavior
+    e.preventDefault();
+    
+    // Demographics
+    $('[name="Age"]').val(Math.floor(Math.random() * (75 - 18) + 18)); // 18-75 years
+    $('[name="Income"]').val(Math.floor(Math.random() * (120000 - 20000) + 20000)); // $20k-$120k
+    
+    // Randomly select education
+    const educations = ['Basic', '2n Cycle', 'Graduation', 'Master', 'PhD'];
+    $('[name="Education"]').val(educations[Math.floor(Math.random() * educations.length)]);
+    
+    // Randomly select marital status
+    const maritalStatuses = ['Married', 'Together', 'Single', 'Divorced', 'Widow'];
+    $('[name="Marital_Status"]').val(maritalStatuses[Math.floor(Math.random() * maritalStatuses.length)]);
+    
+    // Random household composition
+    $('[name="Kidhome"]').val(Math.floor(Math.random() * 3)); // 0-2 kids
+    $('[name="Teenhome"]').val(Math.floor(Math.random() * 3)); // 0-2 teens
+    
+    // Customer history
+    $('[name="Recency"]').val(Math.floor(Math.random() * 100)); // 0-100 days
+    $('[name="TenureDays"]').val(Math.floor(Math.random() * (1000 - 30) + 30)); // 30-1000 days
+    
+    // Spending in various categories
+    $('[name="MntWines"]').val(Math.floor(Math.random() * 1000));
+    $('[name="MntFruits"]').val(Math.floor(Math.random() * 200));
+    $('[name="MntMeatProducts"]').val(Math.floor(Math.random() * 500));
+    $('[name="MntFishProducts"]').val(Math.floor(Math.random() * 300));
+    $('[name="MntSweetProducts"]').val(Math.floor(Math.random() * 200));
+    $('[name="MntGoldProds"]').val(Math.floor(Math.random() * 300));
+    
+    // Purchase behavior
+    $('[name="NumDealsPurchases"]').val(Math.floor(Math.random() * 10));
+    $('[name="NumWebPurchases"]').val(Math.floor(Math.random() * 15));
+    $('[name="NumCatalogPurchases"]').val(Math.floor(Math.random() * 10));
+    $('[name="NumStorePurchases"]').val(Math.floor(Math.random() * 15));
+    $('[name="NumWebVisitsMonth"]').val(Math.floor(Math.random() * 20));
+    
+    // Campaign responses - more likely to be 0 than 1
+    $('[name="AcceptedCmp1"]').val(Math.random() > 0.2 ? '0' : '1');
+    $('[name="AcceptedCmp2"]').val(Math.random() > 0.2 ? '0' : '1');
+    $('[name="AcceptedCmp3"]').val(Math.random() > 0.2 ? '0' : '1');
+    $('[name="AcceptedCmp4"]').val(Math.random() > 0.2 ? '0' : '1');
+    $('[name="AcceptedCmp5"]').val(Math.random() > 0.2 ? '0' : '1');
+    $('[name="Response"]').val(Math.random() > 0.2 ? '0' : '1');
+    
+    // Other fields
+    $('[name="Complain"]').val(Math.random() > 0.9 ? '1' : '0'); // Very low chance of complaint
+    $('[name="Z_CostContact"]').val(3); // Keep the defaults for these
+    $('[name="Z_Revenue"]').val(11); // Keep the defaults for these
+    
+    // Return focus to the button
+    $(this).blur();
+    return false;
+  });
+});
+</script>
+{% endblock %}
